@@ -1,0 +1,43 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center">Template Driven Form</h1>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-5">
+      <form class="form-group" (ngSubmit)="onSubmit()"  #f="ngForm">
+        <label>Email Address</label>
+        <input
+          type="email"
+          required
+          name="email"
+          class="form-control"
+          ngModel
+          email
+        #email="ngModel">
+        <p *ngIf="!email.valid && email.touched">Please enter a valid email!</p>
+        <label>Password</label>
+        <input type="password" required name="password" class="form-control" ngModel minlength="6" #password="ngModel">
+        <p *ngIf="!password.valid && password.touched">Please enter a strong password</p>
+        <hr />
+        <label>Select Subscription</label>
+        <select name="subscriptions" class="form-control" [ngModel]="defaultSubs">
+          <option>Basic</option>
+          <option>Advanced</option>
+          <option>Pro</option>
+        </select>
+        <div class="clearfix"></div>
+
+        <button type="submit" class="form-control btn btn-primary mt-3" [disabled]="!f.valid">Apply Form</button>
+      </form>
+    </div>
+    <div class="col-6" *ngIf="submitted">
+      <h1>Your Data</h1>
+      <p>Your Email: {{subsForm.email}} </p>
+      <p>Your Subscription: {{subsForm.subscription}}</p>
+    </div>
+  </div>
+</div>
